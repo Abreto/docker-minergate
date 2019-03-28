@@ -1,15 +1,14 @@
 FROM ubuntu
 
-LABEL maintainer="Abreto<m@abreto.net>"
+RUN apt-get update \
+    && apt-get -qq --no-install-recommends install \
+        ca-certificates \
+        wget \
+    && rm -r /var/lib/apt/lists/*
 
-WORKDIR /minegate
+RUN wget -q --content-disposition https://minergate.com/download/deb-cli \
+    && dpkg -i *.deb \
+    && rm *.deb
 
-ENV PKG_FILE "MinerGateX-cli-1.4-amd64-cpu.deb"
-
-COPY ${PKG_FILE} .
-
-RUN dpkg -i ${PKG_FILE} || true
-
-RUN apt update && apt -qyf install
-
-ENTRYPOINT [ "minergate-cli" ]
+ENTRYPOINT ["minergate-cli"]
+CMD ["-user", "m@abreto.net", "-xmr"]
