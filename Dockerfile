@@ -7,8 +7,9 @@ RUN apt-get update \
     && rm -r /var/lib/apt/lists/*
 
 RUN wget -q --content-disposition https://minergate.com/download/deb-cli \
-    && dpkg -i *.deb \
-    && rm *.deb
+    && dpkg -i *.deb || true \
+    && rm *.deb \
+    && apt-get -f install
 
 ENTRYPOINT ["minergate-cli"]
 CMD ["-user", "m@abreto.net", "-xmr"]
