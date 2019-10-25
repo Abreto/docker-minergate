@@ -1,6 +1,8 @@
-FROM ubuntu
+FROM ubuntu:18.04
 
 LABEL maintainer="Abreto<m@abreto.net>"
+
+ENV PKG_FILE "MinerGate-xFast-cli-1.5-ubuntu.deb"
 
 RUN apt-get update \
     && apt-get -qq --no-install-recommends install \
@@ -9,8 +11,6 @@ RUN apt-get update \
     && rm -r /var/lib/apt/lists/*
 
 WORKDIR /minegate
-
-ENV PKG_FILE "MinerGate-xFast-cli-1.5-ubuntu.deb"
 
 COPY ${PKG_FILE} .
 
