@@ -10,7 +10,7 @@ RUN apt-get update \
 
 WORKDIR /minegate
 
-ENV PKG_FILE "MinerGateX-cli-1.4-amd64-cpu.deb"
+ENV PKG_FILE "MinerGate-xFast-cli-1.5-ubuntu.deb"
 
 COPY ${PKG_FILE} .
 
